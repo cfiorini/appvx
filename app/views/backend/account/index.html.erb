@@ -1,0 +1,52 @@
+<div class="row">
+  <div class="col-2">
+    <h1><%=t 'account.index' %></h1>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-2">
+    <%= link_to(t('account.buy'), backend_account_buy_path, {class: 'btn btn-danger'}) if reseller_signed_in? %>
+  </div>
+</div>
+<br>
+<div class="row">
+  <div class="col">
+    <table class="table table-bordered table-hover table-striped">
+      <thead>
+      <tr>
+        <% if admin_signed_in? %>
+          <th><%=t 'account.reseller' %></th>
+        <% end %>
+        <th><%=t 'account.name' %></th>
+        <th><%=t 'account.qty' %></th>
+        <th><%=t 'account.payment_method' %></th>
+        <th><%=t 'account.popmap_count' %></th>
+        <th><%=t 'account.total_price' %></th>
+        <th><%=t 'account.created' %></th>
+      </tr>
+      </thead>
+      <tbody>
+      <% for row in @list %>
+        <tr>
+          <% if admin_signed_in? %>
+            <td><%= row.reseller.email %></td>
+          <% end %>
+          <td><%= row.name %></td>
+          <td>
+            <% if row.response_credentials.count > 0 %>
+              <%= link_to(row.qty, backend_account_show_path(id: row.id))%>
+            <% else %>
+              <%= row.qty %>
+            <% end %>
+          </td>
+          <td><%= row.payment_method %></td>
+          <td><%= row.accesses.count %></td>
+          <td><%= number_to_currency row.total_price %></td>
+          <td><%= row.created_at.to_s(:long) %></td>
+        </tr>
+      <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>

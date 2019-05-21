@@ -1,0 +1,30 @@
+<br>
+
+<div class="row">
+  <div class="col">
+    <h2><%= "#{@account.name} #{t('account.created').downcase} #{@account.created_at.to_s(:long)}" %> </h2>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col">
+    <table class="table table-striped table-hover table-bordered">
+      <thead>
+        <tr>
+          <th>username</th>
+          <th>password</th>
+          <th>qr_code</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% for row in @account.response_credentials %>
+          <tr>
+            <td><%= row['username'] %></td>
+            <td><%= row['password'] %></td>
+            <td><%= row['qr_code'] %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>

@@ -1,0 +1,41 @@
+<div class="row">
+  <div class="col-4">
+    <h1><%=t 'account.buy' %></h1>
+  </div>
+</div>
+<br>
+<div class="row">
+  <div class="col-4">
+    <%= form_for :account do |f| %>
+      <div class="form-group">
+        <%= f.label :name, t('account.name') %>
+        <%= f.text_field :name, class: 'form-control' %>
+        <% if @account.errors.messages.has_key?(:name) %>
+          <% for err in @account.errors.messages[:name] %>
+            <%= content_tag(:span, err, class: 'badge badge-danger') %>
+          <% end %>
+        <% end %>
+      </div>
+      <div class="form-group">
+        <%= f.label :qty, t('account.qty') %>
+        <%= f.number_field :qty, class: 'form-control' %>
+        <% if @account.errors.messages.has_key?(:qty) %>
+          <% for err in @account.errors.messages[:qty] %>
+            <%= content_tag(:span, err, class: 'badge badge-danger') %>
+          <% end %>
+        <% end %>
+      </div>
+      <div class="form-group">
+        <%= f.label :accesses, t('account.accesses') %>
+        <%= f.select :accesses, PopMap.to_select, {include_blank: false, include_hidden: false}, multiple: true, class: 'form-control' %>
+        <% if @account.errors.messages.has_key?(:accesses) %>
+          <% for err in @account.errors.messages[:accesses] %>
+            <%= content_tag(:span, err, class: 'badge badge-danger') %>
+          <% end %>
+        <% end %>
+      </div>
+      <%= submit_tag 'Send', class: 'btn btn-danger' %>
+    <% end %>
+
+  </div>
+</div>

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>AppVX</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_pack_tag 'application', media: 'all' %>
+    <%= javascript_pack_tag 'application' %>
+  </head>
+
+  <body>
+    <% if devise_signed_in? %>
+      <%= render partial: 'layouts/navbar_reseller' %>
+    <% end %>
+
+    <% if flash %>
+      <%= render partial: 'layouts/flash_messages' %>
+    <% end %>
+
+    <div class="container-fluid">
+      <%= yield %>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,23 @@
+<div class="row">
+  <div class="col-4">
+    <h1><%=t 'pop_map.edit' %></h1>
+  </div>
+</div>
+<br>
+<div class="row">
+  <div class="col-4">
+    <%= form_for :pop_map do |f| %>
+      <div class="form-group">
+        <%= f.label :name, t('pop_map.price') %>
+        <%= f.text_field :price, class: 'form-control', value: "#{@pop_map.price}".sub('.', ',') %>
+        <% if @pop_map.errors.messages.has_key?(:price) %>
+          <% for err in @pop_map.errors.messages[:price] %>
+            <%= content_tag(:span, err, class: 'badge badge-danger') %>
+          <% end %>
+        <% end %>
+      </div>
+      <%= submit_tag t('operation.update'), class: 'btn btn-danger' %>
+    <% end %>
+
+  </div>
+</div>
